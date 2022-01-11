@@ -1,0 +1,54 @@
+/*Q. Create an array of 10 students and print the record of those students who got the highest marks and who got minimum marks. The structure of student class is as follows 
+class Student
+{
+	private int rollno;
+	private int marks
+	private String name;
+}
+// create constructor or getter and setter methods as per need*/
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+class StudentMarks{
+    private int rollno;
+    private int marks;
+    private String name;
+     StudentMarks(int rollno,int marks,String name){
+         this.rollno=rollno;
+         this.marks=marks;
+         this.name=name;
+     }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        StudentMarks arr[] = new StudentMarks[10];
+
+
+        for(int i=0;i< arr.length;i++){
+            int r = sc.nextInt();
+            int m = sc.nextInt();
+            String n = sc.nextLine();
+            arr[i]= new StudentMarks(r,m,n);
+        }
+        int max=0;
+        int min =0;
+        for(StudentMarks i :arr) {
+            if (i.marks > max) {
+                max = i.marks;
+            }
+            if (i.marks < min) {
+                min = i.marks;
+            }
+        }
+
+        for (StudentMarks i: arr) {
+            if (i.marks == max) {
+                System.out.println("Maximum marks are :" + " " + i.marks + " obtained by" + " " + i.rollno + " " + i.name);
+            }
+            if(i.marks == min){
+                System.out.println("Minimum marks are :"+i.marks+"obtained by"+" "+i.rollno+" "+i.name);
+            }
+        }
+    }
+}
