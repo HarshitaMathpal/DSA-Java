@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class TrailingZeroes {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n;
+        n = sc.nextInt();
+        int fact = 1;
+        while (n > 0) {
+            fact = fact * n;
+            n--;
+        }
+        System.out.println(fact);
+        int zero = 0;
+        while (fact > 0) {
+            if (fact % 10 == 0 ) {
+                zero++;
+            }
+            fact= fact/10;
+
+            }
+        System.out.println(zero);
+
+
+    }
+}
