@@ -1,0 +1,29 @@
+//Q. Design a method that returns true if element n is a member of given array  and false if not  by using the recursion
+
+import java.util.Scanner;
+
+public class CheckArrayElement {
+    public static boolean findElement(int[] arr,int index,int num){
+        if(index == arr.length){
+            return false;
+        }
+        if(arr[index]==num) {
+            return true;
+        }
+        boolean flag= findElement(arr,index+1,num);
+        return flag;
+    }
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        System.out.println("Enter the size of Array : ");
+        int n =sc.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter the elements of array : ");
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
+        System.out.println("Enter the element you want to find : ");
+        int num=sc.nextInt();
+        System.out.println(findElement(arr,0,num));
+    }
+}
