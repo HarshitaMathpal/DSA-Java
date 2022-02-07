@@ -1,0 +1,26 @@
+/*Q. Write a recursive function to convert a decimal no into a binary no, print the binary number.
+
+
+ */
+
+import java.util.Scanner;
+
+public class DecimalToBinary {
+    public static String convert(int n){
+        String s="";
+        if(n==0){
+            return s;
+        }
+        int k=n%2;
+        s=convert(n/2)+k+s;
+        return s;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        System.out.println("Enter the number you want to convert in binary : ");
+        int n = sc.nextInt();
+        System.out.println("Converted form is : "+convert(n));
+
+    }
+}
