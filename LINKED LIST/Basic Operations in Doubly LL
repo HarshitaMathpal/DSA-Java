@@ -107,6 +107,23 @@ public class DoublyLL {
         next.prev=temp;
         temp.next=next;
     }
+    
+     public void reverse(){
+        if(head==null){
+            System.out.println("Empty list");
+            return;
+        }
+        Node temp=head;
+        while(temp.next!=null){
+            temp=temp.next;
+        }
+        while(temp.prev!=null){
+            System.out.print(temp.data+" -> ");
+            temp=temp.prev;
+        }
+        System.out.print(temp.data);
+
+    }
 
     public static void main(String[] args) {
         DoublyLL obj = new DoublyLL();
@@ -127,5 +144,8 @@ public class DoublyLL {
         obj.display();
         obj.insertAtAny(new Node(333),3);
         obj.display();
+        obj.insertatLast(33);
+        obj.display();
+        obj.reverse();
     }
 }
