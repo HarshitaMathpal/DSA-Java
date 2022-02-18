@@ -1,0 +1,86 @@
+import java.util.Scanner;
+
+public class Test {
+    static class Node{
+        String data;
+        Node next;
+        Node(String data) {
+            this.data = data;
+            next = null;
+        }
+
+    }
+     static Node head;
+     static Node tail;
+
+    public static boolean isEmpty() {
+        return (head == null) && (tail == null);
+    }
+
+    public  void add(String data) {
+        Node newnode = new Node(data);
+        if (tail == null) {           //ll is empty
+            tail = head = newnode;
+        }
+        tail.next = newnode;
+        tail = newnode;
+    }
+
+
+    public  String printString(String s){
+        String left="";
+        String right="";
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if(ch%2==0){
+                left += Character.toString(ch);
+            }
+            else{
+                right += Character.toString(ch);
+            }
+        }
+       // System.out.println(left+right);
+        return right+left;
+    }
+
+    public String delete() {
+        if (isEmpty()) {
+            System.out.println("Empty list");
+            return "null";
+
+        }
+        else {
+            String front = head.data;
+            if (head == tail) {
+                tail = null;
+            }
+            head = head.next;
+            return front;
+        }
+    }
+
+    public  String peek() {
+        if (isEmpty()) {
+            System.out.println("Empty list");
+            return "Null";
+        }
+        return head.data;
+    }
+
+
+
+    public static void main(String[] args) {
+        Test obj = new Test();
+        Scanner sc = new Scanner(System.in);
+        String s=sc.next();
+        String res = obj.printString(s);
+        for (int i=0;i<res.length();i++){
+            obj.add(Character.toString(res.charAt(i)));
+        }
+        while(!isEmpty()){
+            System.out.print(obj.peek()+" ");
+            obj.delete();
+        }
+
+    }
+}
