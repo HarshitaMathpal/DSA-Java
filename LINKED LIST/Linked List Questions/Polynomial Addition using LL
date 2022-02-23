@@ -1,0 +1,91 @@
+//import java.util.Scanner;
+public class Poly {
+    static class Node {
+        int coeff;
+        int exp;
+        Node next;
+
+        public Node(int coeff, int exp) {
+            this.coeff = coeff;
+            this.exp = exp;
+            next = null;
+        }
+    }
+
+        public static Node addPoly(Node n1, Node n2) {
+            Node a = n1;
+            Node b = n2;
+            Node temp = new Node(0, 0);
+            Node sum = temp;
+            while (a != null || b != null) {
+                if (a == null) {
+                    sum.next = b;
+                    break;
+                } else if (b == null) {
+                    sum.next = a;
+                    break;
+                } else if (a.exp == b.exp) {
+                    sum.next = new Node(a.coeff + b.coeff, a.exp);
+                    a = a.next;
+                    b = b.next;
+                } else if (a.exp > b.exp) {
+                    sum.next = new Node(a.coeff, a.exp);
+                    a = a.next;
+                } else if (a.exp < b.exp) {
+                    sum.next = new Node(b.coeff, b.exp);
+                    b = b.next;
+                }
+                sum = sum.next;
+            }
+            return temp.next;
+        }
+
+
+        public static void main(String[] args) {
+            //  Scanner sc = new Scanner(System.in);
+            Node n1 = null, n2 = null, ptr1 = null, ptr2 = null;
+            int[] coeffarr1 = {5, 4, 2};
+            int[] exparr1 = {2, 1, 0};
+            int n = coeffarr1.length;
+            for (int i = 0; i < n; i++) {
+                int a = coeffarr1[i];
+                int b = exparr1[i];
+                Node temp = new Node(a, b);
+                if (n1 == null) {
+                    n1 = temp;
+                    ptr1 = temp;
+                } else {
+                    ptr1.next = temp;
+                    ptr1 = temp;
+                }
+            }
+            int[] coeffarr2 = {-5, -5};
+            int[] exparr2 = {1, 0};
+            n = coeffarr2.length;
+            for (int i = 0; i < n; i++) {
+                int a = coeffarr2[i];
+                int b = exparr2[i];
+                Node temp = new Node(a, b);
+                if (n2 == null) {
+                    n2 = temp;
+                    ptr2 = temp;
+                } else {
+                    ptr2.next = temp;
+                    ptr2 = temp;
+                }
+            }
+            Poly obj = new Poly();
+            Node sum = obj.addPoly(n1,n2);
+            Node trav = sum;
+            while(trav!=null){
+                System.out.print(trav.coeff+"x^"+ trav.exp);
+                if(trav.next!=null){
+                    System.out.print(" + ");
+                }
+                trav=trav.next;
+            }
+            System.out.println();
+
+        }
+    }
+
