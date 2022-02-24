@@ -1,0 +1,139 @@
+public class DoublyCircular {
+    static Node head;
+    static class Node{
+        int data;
+        Node next;
+        Node prev;
+        Node(int data){
+            this.data = data;
+        }
+    }
+    public void insertAtBegin(int data){
+        Node newnode = new Node(data);
+        if(head==null){
+            newnode.next=newnode.prev=newnode;
+            head=newnode;
+        }
+        else{
+            Node last = head.prev;
+            last.next=newnode;
+            newnode.prev=last;
+            head.prev=newnode;
+            newnode.next=head;
+            head=newnode;
+        }
+    }
+    public void insertatEnd(int data){
+        Node newnode = new Node(data);
+        if(head==null){
+            insertAtBegin(data);
+        }
+        else{
+            Node last=head.prev;
+            newnode.prev=last;
+            newnode.next=head;
+            last.next=head.prev=newnode;
+        }
+    }
+    public void insertatAny(int data,int pos){
+        Node newnode = new Node(data);
+        if(pos==1){
+            insertAtBegin(data);
+        }
+        else{
+            Node temp=head;
+            for(int i =0;i<pos-2;i++){
+                temp=temp.next;
+            }
+            newnode.prev=temp;
+            newnode.next=temp.next;
+            temp.next = temp.next.prev=newnode;
+        }
+    }
+    public void deletefromBegin(){
+        if (head == null) {
+            System.out.println("empty list");
+        }
+        else if(head.next==head.prev){
+            head=null;
+        }
+        else {
+            Node last=head.prev;
+            head = head.next;
+            head.prev =last ;
+        }
+    }
+    public void deleteAtLast(){
+        if(head==null){
+            System.out.println("emptyList");
+        }
+        if(head.next==head.prev) {
+            head = null;
+        }
+        Node secondLast = head.prev.prev;
+        secondLast.next=head;
+        head.prev=secondLast;
+    }
+
+    public void deleteNode(Node head, int pos){
+        if(head==null){
+            System.out.println("empty list");
+            return ;
+        }
+        if(pos==1){
+            deletefromBegin();
+            return;
+        }
+        Node temp=head;
+        for(int i=0;i<pos-2;i++){
+            temp=temp.next;
+        }
+        temp.next=temp.next.next;
+        temp.next.prev=temp;
+    }
+
+    public void printList(){
+        if(head==null){
+            System.out.println("list is empty");
+        }
+        else{
+            Node temp = head;
+            while(temp.next!= head){
+                System.out.print(temp.data+" -> ");
+                temp=temp.next;
+            }
+            System.out.print(temp.data);
+            System.out.println();
+        }
+    }
+    public int countNode(){
+        Node temp=head;
+        int c=1;
+        if(head==null){
+            return 0;
+        }
+        else {
+            while (temp.next != head) {
+                c++;
+                temp = temp.next;
+            }
+        }
+        return c;
+    }
+
+    public static void main(String[] args) {
+        DoublyCircular obj = new DoublyCircular();
+        obj.insertAtBegin(5);
+        obj.insertAtBegin(100);
+        obj.insertAtBegin(54);
+        obj.insertAtBegin(60);
+        obj.insertatEnd(1000);
+        obj.insertatEnd(6);
+        obj.insertatAny(2,4);
+        obj.deletefromBegin();
+        obj.deleteAtLast();
+        obj.deleteNode(head,2);
+        System.out.println(obj.countNode());
+        obj.printList();
+    }
+}
