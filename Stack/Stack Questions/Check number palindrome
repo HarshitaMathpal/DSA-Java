@@ -1,0 +1,66 @@
+/* Check whether a given no. is palindrome or not*/
+
+import java.util.Scanner;
+
+public class PalindromeStack {
+    static class Stack {
+        char[] arr;
+        int top;
+        int size;
+
+        public Stack(int size) {
+            this.size = size;
+            top = -1;
+            arr = new char[size];
+        }
+
+        public boolean isFull() {
+            return top == size - 1;
+        }
+
+        public void push(char data) {
+            if (!isFull()) {
+                top++;
+                arr[top] = data;
+            } else {
+                System.out.println("Stack overflow");
+            }
+        }
+
+        public char pop() {
+            if (top != -1) {
+                char res = arr[top];
+                top--;
+                return res;
+            } else {
+                System.out.println("Stack is empty");
+                return '0';
+            }
+        }
+
+
+    }
+    public boolean checkPalindrome(int n){
+        String s = Integer.toString(n);
+        Stack obj = new Stack(s.length());
+        for(int i =0;i<s.length();i++){
+            obj.push(s.charAt(i));
+        }
+        for(int i=0;i<s.length()/2;i++){
+            char ch =s.charAt(i);
+            if(ch==obj.pop()){
+                continue;
+            }
+            else return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        PalindromeStack obj = new PalindromeStack();
+        System.out.println("Enter the no. you want to check : ");
+        int n =sc.nextInt();
+        System.out.println(obj.checkPalindrome(n));
+    }
+}
