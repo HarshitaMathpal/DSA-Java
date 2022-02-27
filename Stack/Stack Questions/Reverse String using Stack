@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class ReverseStringByStack {
+    static class Stack {
+        int size;
+        char[] arr;
+        int top;
+
+        Stack(int size) {
+            this.size = size;
+            arr = new char[size];
+            top = -1;
+        }
+
+
+        public boolean isFull() {
+            return top == size - 1;
+        }
+
+        public void push(char data) {
+            if (!isFull()) {
+                top++;
+                arr[top] = data;
+            } else {
+                System.out.println("Stack overflow");
+            }
+        }
+
+        public char pop() {
+            if (top != -1) {
+                char res = arr[top];
+                top--;
+                return res;
+            } else {
+                System.out.println("Stack is empty");
+                return 0;
+            }
+        }
+        public boolean isEmpty(){
+            return top==-1;
+        }
+
+
+        public String reverse(String s) {
+            for (int i = 0; i < s.length(); i++) {
+                char ch = s.charAt(i);
+                push(ch);
+            }
+            char c;
+            String ans="";
+            for(int i =0;i<s.length();i++){
+                c=pop();
+                ans+=Character.toString(c);
+            }
+            return ans;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter string : ");
+        String s = sc.next();
+        int n = s.length();
+        Stack obj = new Stack(n);
+        System.out.println("Reversed string is : "+obj.reverse(s));
+    }
+}
