@@ -1,0 +1,85 @@
+import java.util.Scanner;
+
+public class BinarySearchTree {
+    static class Node{
+        int data;
+        Node left;
+        Node right;
+        Node(int data){
+            this.data=data;
+            this.left=null;
+            this.right=null;
+        }
+    }
+    
+    //Method to insert 
+    public static Node insert(Node root,int key){
+        if(root ==null){
+            return new Node(key);
+        }
+        if(key < root.data){
+            root.left= insert(root.left,key);
+        }
+        else{
+            root.right=insert(root.right,key);
+        }
+        return root;
+    }
+    public static void inOrder(Node root){
+        if(root==null){
+            return;
+        }
+        inOrder(root.left);
+        System.out.print(root.data+" ");
+        inOrder(root.right);
+    }
+
+    public static Node constructBST(int[] keys)
+    {
+        Node root = null;
+        for (int key: keys) {
+            root = insert(root, key);
+        }
+        return root;
+    }
+    
+    //Method to search
+    public static boolean search(Node root,int val){
+
+        if(root==null){
+            return false;
+        }
+        if(root.data==val){
+            return true;
+        }
+        if(root.data<val){
+             search(root.left,val);
+        }
+        else
+            search(root.right,val);
+
+        return false;
+    }
+    
+    public static void main(String[] args) {
+        //   BinarySearchTree obj = new BinarySearchTree();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the no. of elements of tree : ");
+        int n= sc.nextInt();
+        System.out.println("Enter the elements");
+        int[] key = new int[n];
+        for(int i=0;i<n;i++){
+            key[i]=sc.nextInt();
+        }
+        Node root =constructBST(key);
+        inOrder(root);
+        System.out.println("Enter the value you want to search : ");
+        int x=sc.nextInt();
+        if(search(root,x)){
+            System.out.println("Found");
+        }
+        else
+            System.out.println("Not found");
+    }
+}
+
